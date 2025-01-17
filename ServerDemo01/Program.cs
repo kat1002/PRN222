@@ -41,7 +41,7 @@ namespace ServerDemo01
 
                     // Send back a response
                     stream.Write(msg, 0, msg.Length);
-                    Console.WriteLine($"Sent: {msg}");
+                    Console.WriteLine($"Sent: {data}");
                 }
 
                 // Shutdown and end connection
