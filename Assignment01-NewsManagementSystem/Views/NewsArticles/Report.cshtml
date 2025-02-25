@@ -1,0 +1,65 @@
+﻿
+@model List<Assignment01_NewsManagementSystem.Models.NewsArticle>
+
+@{
+    Layout = "_Layout";
+}
+
+@{
+    ViewData["Title"] = "News Report";
+}
+
+<h2>News Report</h2>
+
+<form asp-action="Report" method="get">
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label>Start Date:</label>
+            <input type="date" name="StartDate" class="form-control" value="@Context.Request.Query["StartDate"]" />
+        </div>
+        <div class="col-md-3">
+            <label>End Date:</label>
+            <input type="date" name="EndDate" class="form-control" value="@Context.Request.Query["EndDate"]" />
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">Generate Report</button>
+        </div>
+    </div>
+</form>
+
+@if (Model.Count > 0)
+{
+        <div class="card p-3 shadow-sm bg-white rounded">
+            <h4>News Report</h4>
+            <hr />
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Created Date</th>
+                        <th>Category</th>
+                        <th>Author</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var news in Model)
+                {
+                            <tr>
+                                <td>@news.NewsTitle</td>
+                                <td>@news.CreatedDate.ToString()</td>
+                                <td>@news.Category?.CategoryName</td>
+                                <td>@news.CreatedBy?.AccountName</td>
+                                <td>@(news.NewsStatus.GetValueOrDefault() ? "Active" : "Inactive")</td>
+                            </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+}
+else
+{
+        <p class="text-danger">No news found for the selected period.</p>
+}
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Back to List</a>

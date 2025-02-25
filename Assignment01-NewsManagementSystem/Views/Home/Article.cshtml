@@ -1,0 +1,86 @@
+﻿@model Assignment01_NewsManagementSystem.Models.NewsArticle
+
+@{
+    ViewData["Title"] = "Article";
+}
+
+<style>
+    /* Style for the title */
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2.5em;
+        margin-top: 20px;
+    }
+
+    /* Style for the headline */
+    h3 {
+        color: #16a085;
+        font-size: 1.8em;
+        margin-top: 10px;
+    }
+
+    /* Style for the general info section */
+    div p {
+        font-size: 1.1em;
+        color: #34495e;
+        margin: 8px 0;
+    }
+
+    /* Style for the category and created by section */
+    .info strong {
+        color: #2980b9;
+    }
+
+    /* Style for the content section */
+    .content {
+        margin-top: 30px;
+    }
+
+    .content h4 {
+        font-size: 1.6em;
+        color: #8e44ad;
+    }
+
+    .content p {
+        font-size: 1.2em;
+        color: #7f8c8d;
+        line-height: 1.6;
+    }
+
+    /* Style for the back button */
+    .btn-secondary {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1.1em;
+        background-color: #2ecc71;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background-color: #27ae60;
+    }
+</style>
+
+<h1>@Model.NewsTitle</h1>
+
+<div>
+    <h3>@Model.Headline</h3>
+    <p><strong>Category:</strong> @Model.Category.CategoryName</p>
+    <p><strong>Source:</strong> @Model.NewsSource</p>
+    <p><strong>Created On:</strong> @Model.CreatedDate.ToString()</p>
+    <p><strong>Created By:</strong> @Model.CreatedBy.AccountName</p>
+</div>
+
+<div>
+    <h4>News Content</h4>
+    <p>@Model.NewsContent</p>
+</div>
+
+<div>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to List</a>
+</div>

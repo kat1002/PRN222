@@ -1,0 +1,85 @@
+﻿@model Assignment01_NewsManagementSystem.Models.NewsArticle
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    .details-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .details-title {
+        text-align: center;
+        color: #333;
+        font-weight: bold;
+    }
+    .details-row dt {
+        font-weight: bold;
+        color: #555;
+    }
+    .details-row dd {
+        color: #222;
+        padding-bottom: 10px;
+    }
+    .details-links {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .details-links a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+    }
+    .details-links a:hover {
+        text-decoration: underline;
+    }
+
+</style>
+
+<div class="details-container">
+    <h1 class="details-title">News Article Details</h1>
+    <hr />
+    <dl class="row details-row">
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.NewsTitle)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.NewsTitle)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Headline)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Headline)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CreatedDate)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.CreatedDate)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.NewsContent)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.NewsContent)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.NewsSource)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.NewsSource)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.NewsStatus)</dt>
+        <dd class="col-sm-8">@(Model.NewsStatus.GetValueOrDefault() ? "Active" : "Inactive")</dd>
+
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.UpdatedById)</dt>
+        <dd class="col-sm-8">@ViewBag.UpdatedByName</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ModifiedDate)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.ModifiedDate)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Category)</dt>
+        <dd class="col-sm-8">@ViewBag.CategoryName</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CreatedBy)</dt>
+        <dd class="col-sm-8">@ViewBag.CreatedByName</dd>
+    </dl>
+
+    <div class="details-links">
+        <a asp-action="Edit" asp-route-id="@Model?.NewsArticleId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

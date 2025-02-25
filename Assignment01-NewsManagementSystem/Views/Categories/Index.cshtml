@@ -1,0 +1,143 @@
+﻿@model IEnumerable<Assignment01_NewsManagementSystem.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Action links styling */
+.table td a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 0 5px;
+    font-size: 14px;
+}
+/* Center align action buttons */
+.action-buttons {
+    text-align: center;
+}
+
+/* Ensure buttons are evenly spaced */
+.action-buttons a {
+    margin-right: 5px;
+}
+
+/* Button Styling */
+.btn {
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover Effects */
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Hover effects */
+.table td a:hover {
+    opacity: 0.8;
+}
+
+/* Create New Button */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover Effect */
+.btn-primary:hover {
+    background-color: #0056b3;
+    opacity: 0.9;
+}
+
+
+</style>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryDesciption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentCategory)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryDesciption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentCategory.CategoryName)
+            </td>
+            <td class="action-buttons">
+                <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.CategoryId">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,118 @@
+﻿@model Assignment01_NewsManagementSystem.Models.SystemAccount
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    /* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Page title */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Section heading */
+h4 {
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Divider line */
+hr {
+    border: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* Definition list styling */
+dl.row {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels */
+dt {
+    font-weight: bold;
+    color: #444;
+}
+
+/* Data values */
+dd {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Links */
+a {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #007bff;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* Action links */
+div > a {
+    margin-right: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+div > a:hover {
+    background-color: #0056b3;
+}
+
+</style>
+
+<h1>Account Details</h1>
+
+<div class="card p-3 shadow-sm bg-white rounded">
+    <h4>System Account</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.AccountName)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.AccountName)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.AccountEmail)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.AccountEmail)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.AccountRole)</dt>
+        <dd class="col-sm-9">
+            @{
+                string roleName = Model.AccountRole switch
+                {
+                    0 => "Admin",
+                    1 => "Lecturer",
+                    2 => "Staff",
+                    _ => "Unknown"
+                };
+            }
+            @roleName
+        </dd>
+    </dl>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model?.AccountId" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+

@@ -1,0 +1,133 @@
+﻿@model Assignment01_NewsManagementSystem.Models.SystemAccount
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    /* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Container for the form */
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+/* Form styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.control-label {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Input fields */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Validation error messages */
+.text-danger {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Submit button */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Back to List link */
+a {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+</style>
+<h1>Edit Account</h1>
+
+<h4>System Account</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AccountId" />
+
+            <div class="form-group mb-3">
+                <label asp-for="AccountName" class="form-label"></label>
+                <input asp-for="AccountName" class="form-control" />
+                <span asp-validation-for="AccountName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="AccountEmail" class="form-label"></label>
+                <input asp-for="AccountEmail" class="form-control" />
+                <span asp-validation-for="AccountEmail" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="AccountRole" class="form-label"></label>
+                <select asp-for="AccountRole" class="form-control">
+                    <option value="0" selected disabled>Admin</option>
+                    <option value="1">Lecturer</option>
+                    <option value="2">Staff</option>
+                </select>
+                <span asp-validation-for="AccountRole" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="AccountPassword" class="form-label"></label>
+                <input asp-for="AccountPassword" type="password" class="form-control" value="@Model?.AccountPassword" />
+                <span asp-validation-for="AccountPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,97 @@
+﻿@model Assignment01_NewsManagementSystem.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+
+    <style>
+    /* Styling for details container */
+    .details-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .details-container h4 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 15px;
+    }
+
+    /* Styling for the labels */
+    dt {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    dd {
+        margin-bottom: 10px;
+    }
+
+    /* Styling for action buttons */
+    .action-buttons {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        display: inline-block;
+        text-align: center;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: none;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+    }
+</style>
+
+
+</style>
+
+<h1>Category Details</h1>
+
+<div class="details-container">
+    <h4>Category Information</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4"> @Html.DisplayNameFor(model => model.CategoryName) </dt>
+        <dd class="col-sm-8"> @Html.DisplayFor(model => model.CategoryName) </dd>
+
+        <dt class="col-sm-4"> @Html.DisplayNameFor(model => model.CategoryDesciption) </dt>
+        <dd class="col-sm-8"> @Html.DisplayFor(model => model.CategoryDesciption) </dd>
+
+        <dt class="col-sm-4"> @Html.DisplayNameFor(model => model.IsActive) </dt>
+        <dd class="col-sm-8"> @(Model.IsActive.GetValueOrDefault() ? "Active" : "Inactive") </dd>
+
+
+        <dt class="col-sm-4"> Parent Category </dt>
+        <dd class="col-sm-8"> @(Model.ParentCategory != null ? Model.ParentCategory.CategoryName : "None") </dd>
+    </dl>
+</div>
+
+<div class="action-buttons">
+    <a asp-action="Edit" asp-route-id="@Model?.CategoryId" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

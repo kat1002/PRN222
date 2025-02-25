@@ -1,0 +1,124 @@
+﻿@model Assignment01_NewsManagementSystem.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff; /* Primary blue */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 15px;
+}
+
+hr {
+    border-top: 2px solid #dee2e6;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    color: #495057;
+}
+
+input.form-control,
+select.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 8px;
+}
+
+input.form-control:focus,
+select.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.text-danger {
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+</style>
+<h1>Create</h1>
+
+<h4>Category</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label"></label>
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryDesciption" class="control-label"></label>
+                <input asp-for="CategoryDesciption" class="form-control" />
+                <span asp-validation-for="CategoryDesciption" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ParentCategoryId" class="control-label"></label>
+                <select asp-for="ParentCategoryId" class="form-control" asp-items="ViewBag.ParentCategoryId">
+                    <option value="">-- Select Parent Category --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IsActive" class="control-label"></label>
+                <select asp-for="IsActive" class="form-control">
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                </select>
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

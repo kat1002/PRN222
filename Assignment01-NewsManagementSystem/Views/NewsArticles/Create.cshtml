@@ -1,0 +1,171 @@
+﻿@model Assignment01_NewsManagementSystem.Models.NewsArticle
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: black; /* Ensures text is black */
+}
+
+/* Container Styling */
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.col-md-4 {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.control-label {
+    font-weight: bold;
+    color: black;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: black;
+    background-color: #ffffff;
+    transition: border 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Validation Styling */
+.text-danger {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Button Styling */
+.btn-primary {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Back to List Link */
+div a {
+    display: inline-block;
+    margin-top: 15px;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+div a:hover {
+    color: #007bff;
+}
+
+</style>
+
+<h1>Create</h1>
+
+<h4>News Article</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- NewsArticleId -->
+            <div class="form-group">
+                <label asp-for="NewsArticleId" class="control-label"></label>
+                <input asp-for="NewsArticleId" class="form-control" required />
+                <span asp-validation-for="NewsArticleId" class="text-danger"></span>
+            </div>
+
+            <!-- News Title -->
+            <div class="form-group">
+                <label asp-for="NewsTitle" class="control-label"></label>
+                <input asp-for="NewsTitle" class="form-control" required />
+                <span asp-validation-for="NewsTitle" class="text-danger"></span>
+            </div>
+
+            <!-- Headline -->
+            <div class="form-group">
+                <label asp-for="Headline" class="control-label"></label>
+                <input asp-for="Headline" class="form-control" required />
+                <span asp-validation-for="Headline" class="text-danger"></span>
+            </div>
+
+            <!-- News Content -->
+            <div class="form-group">
+                <label asp-for="NewsContent" class="control-label"></label>
+                <textarea asp-for="NewsContent" class="form-control" rows="5" required></textarea>
+                <span asp-validation-for="NewsContent" class="text-danger"></span>
+            </div>
+
+            <!-- News Source -->
+            <div class="form-group">
+                <label asp-for="NewsSource" class="control-label"></label>
+                <input asp-for="NewsSource" class="form-control" required />
+                <span asp-validation-for="NewsSource" class="text-danger"></span>
+            </div>
+
+            <!-- Category Dropdown -->
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId" required>
+                    <option value="">-- Select Category --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <!-- News Status -->
+            <div class="form-group">
+                <label asp-for="NewsStatus" class="control-label"></label>
+                <select asp-for="NewsStatus" class="form-control" required>
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                </select>
+                <span asp-validation-for="NewsStatus" class="text-danger"></span>
+            </div>
+
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

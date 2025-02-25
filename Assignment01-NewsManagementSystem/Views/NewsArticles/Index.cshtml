@@ -1,0 +1,152 @@
+﻿@model IEnumerable<Assignment01_NewsManagementSystem.Models.NewsArticle>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: black;
+}
+
+/* Style the Create New button */
+p a {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+p a:hover {
+    background-color: #0056b3;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover Effect */
+.table tbody tr:hover {
+    background-color: #d4e3fc;
+}
+
+/* Action Links */
+td a {
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+
+td a[href*='Edit'] {
+    background-color: #28a745;
+}
+
+td a[href*='Edit']:hover {
+    background-color: #218838;
+}
+
+td a[href*='Details'] {
+    background-color: #ffc107;
+    color: black;
+}
+
+td a[href*='Details']:hover {
+    background-color: #e0a800;
+}
+
+td a[href*='Delete'] {
+    background-color: #dc3545;
+}
+
+td a[href*='Delete']:hover {
+    background-color: #c82333;
+}
+
+
+</style>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+
+@if (User.IsInRole("Admin"))
+{
+     <!-- Admin: Full Width Button -->
+    <p>
+        <a asp-action="Report">Report Statistic</a>
+    </p>
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.NewsTitle)</th>
+            <th>@Html.DisplayNameFor(model => model.Headline)</th>
+            <th>@Html.DisplayNameFor(model => model.CreatedDate)</th>
+            <th>@Html.DisplayNameFor(model => model.NewsContent)</th>
+            <th>@Html.DisplayNameFor(model => model.NewsSource)</th>
+            <th>@Html.DisplayNameFor(model => model.NewsStatus)</th>
+            <th>@Html.DisplayNameFor(model => model.Category)</th>
+            <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.NewsTitle)</td>
+                    <td>@(item.Headline.Length > 50 ? item.Headline.Substring(0, 50) + "..." : item.Headline)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
+                    <td>@(item.NewsContent.Length > 50 ? item.NewsContent.Substring(0, 50) + "..." : item.NewsContent)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NewsSource)</td>
+                    <td>@(item.NewsStatus.GetValueOrDefault() ? "Active" : "Inactive")</td> 
+                    <td>@Html.DisplayFor(modelItem => item.NewsStatus)</td>
+                    <td> @Html.DisplayFor(modelItem => item.Category.CategoryName) </td>
+                    <td> @Html.DisplayFor(modelItem => item.CreatedBy.AccountName) </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.NewsArticleId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.NewsArticleId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.NewsArticleId">Delete</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
