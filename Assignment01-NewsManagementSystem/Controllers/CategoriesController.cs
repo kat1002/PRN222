@@ -9,10 +9,10 @@ namespace Assignment01_NewsManagementSystem.Controllers
     [Authorize(Roles = "Admin, Staff")]
     public class CategoriesController : Controller
     {
-
+        private FunewsManagementContext _context;
         public CategoriesController(FunewsManagementContext context)
         {
-
+            _context = context;
         }
 
         // GET: Categories
@@ -111,6 +111,15 @@ namespace Assignment01_NewsManagementSystem.Controllers
             {
                 try
                 {
+                    // Detach existing category entity to avoid tracking conflicts
+                    var existingCategory = WebManager.Instance().Context.Categories
+                        .FirstOrDefault(c => c.CategoryId == category.CategoryId);
+
+                    if (existingCategory != null)
+                    {
+                        WebManager.Instance().Context.Entry(existingCategory).State = EntityState.Detached;
+                    }
+
                     WebManager.Instance().Context.Update(category);
                     await WebManager.Instance().Context.SaveChangesAsync();
                 }

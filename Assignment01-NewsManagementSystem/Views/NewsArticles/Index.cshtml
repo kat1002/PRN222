@@ -138,7 +138,6 @@ td a[href*='Delete']:hover {
                     <td>@(item.NewsContent.Length > 50 ? item.NewsContent.Substring(0, 50) + "..." : item.NewsContent)</td>
                     <td>@Html.DisplayFor(modelItem => item.NewsSource)</td>
                     <td>@(item.NewsStatus.GetValueOrDefault() ? "Active" : "Inactive")</td> 
-                    <td>@Html.DisplayFor(modelItem => item.NewsStatus)</td>
                     <td> @Html.DisplayFor(modelItem => item.Category.CategoryName) </td>
                     <td> @Html.DisplayFor(modelItem => item.CreatedBy.AccountName) </td>
                     <td>

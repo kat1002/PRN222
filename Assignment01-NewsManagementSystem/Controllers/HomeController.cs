@@ -20,9 +20,9 @@ namespace Assignment01_NewsManagementSystem.Controllers
         public async Task<IActionResult> Index()
         {
             var newsArticles = await WebManager.Instance().Context.NewsArticles
+                .Where(n => n.NewsStatus.Equals(true))
                 .Include(n => n.Category)
                 .OrderByDescending(n => n.CreatedDate)
-                .Take(6) // Show only latest 6 articles
                 .ToListAsync();
 
             return View(newsArticles);

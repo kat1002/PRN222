@@ -9,9 +9,10 @@ namespace Assignment01_NewsManagementSystem.Controllers
     public class SystemAccountsController : Controller
     {
 
+        private FunewsManagementContext _context;
         public SystemAccountsController(FunewsManagementContext context)
         {
-
+            _context = context;
         }
 
         // GET: SystemAccounts
@@ -96,6 +97,16 @@ namespace Assignment01_NewsManagementSystem.Controllers
             {
                 try
                 {
+                    // Detach any existing tracked entity with the same ID
+                    var existingEntity = WebManager.Instance().Context.SystemAccounts
+                        .FirstOrDefault(x => x.AccountId == systemAccount.AccountId);
+
+                    if (existingEntity != null)
+                    {
+                        WebManager.Instance().Context.Entry(existingEntity).State = EntityState.Detached;
+                    }
+
+                    // Now update the entity
                     WebManager.Instance().Context.Update(systemAccount);
                     await WebManager.Instance().Context.SaveChangesAsync();
                 }
@@ -114,6 +125,7 @@ namespace Assignment01_NewsManagementSystem.Controllers
             }
             return View(systemAccount);
         }
+
 
         // GET: SystemAccounts/Delete/5
         public async Task<IActionResult> Delete(short? id)

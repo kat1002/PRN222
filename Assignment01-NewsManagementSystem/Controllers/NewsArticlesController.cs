@@ -11,9 +11,11 @@ namespace Assignment01_NewsManagementSystem.Controllers
     public class NewsArticlesController : Controller
     {
 
+        private FunewsManagementContext _context;
+
         public NewsArticlesController(FunewsManagementContext context)
         {
-
+            _context = context;
         }
 
         // GET: NewsArticles
@@ -27,13 +29,6 @@ namespace Assignment01_NewsManagementSystem.Controllers
                 .Include(n => n.CreatedBy);
 
             short accountId = short.Parse(userId);
-
-            // If user is a Lecturer, filter by CreatedById
-            if (userRole == "Lecturer")
-            {
-                return View(funewsManagementContext.Where(n => n.NewsStatus.HasValue.Equals(true)));
-            }
-
             return View(await funewsManagementContext.ToListAsync());
         }
 
@@ -149,6 +144,15 @@ namespace Assignment01_NewsManagementSystem.Controllers
 
                     newsArticle.UpdatedById = short.Parse(currentUserId);
                     newsArticle.ModifiedDate = newsArticle.ModifiedDate = DateTime.Now;
+
+                    var existingArticle = WebManager.Instance().Context.NewsArticles
+                        .FirstOrDefault(a => a.NewsArticleId == newsArticle.NewsArticleId);
+
+                    if (existingArticle != null)
+                    {
+                        WebManager.Instance().Context.Entry(existingArticle).State = EntityState.Detached;
+                    }
+
 
                     WebManager.Instance().Context.Update(newsArticle);
                     await WebManager.Instance().Context.SaveChangesAsync();
