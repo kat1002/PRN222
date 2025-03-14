@@ -1,0 +1,25 @@
+﻿<Window x:Class="Project1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project1"
+        mc:Ignorable="d"
+        Title="StarWindow" Height="450" Width="800">
+    <Grid>
+        <Label Content="Star's Info&#xD;&#xA;" HorizontalAlignment="Left" Margin="60,55,0,0" VerticalAlignment="Top" Width="120" Height="40" FontWeight="Bold" FontSize="20"/>
+        <Label Content="Star Name" HorizontalAlignment="Left" Margin="60,100,0,0" VerticalAlignment="Top" Width="100" Height="40"/>
+        <TextBox x:Name="StarName" HorizontalAlignment="Left" Margin="160,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
+        <Label  Content="Dob&#xD;&#xA;" HorizontalAlignment="Left" Margin="60,158,0,0" VerticalAlignment="Top" Width="100" Height="40"/>
+        <DatePicker x:Name="DobPicker" HorizontalAlignment="Left" Margin="160,158,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description&#xA;" HorizontalAlignment="Left" Margin="60,217,0,0" VerticalAlignment="Top" Width="100" Height="40"/>
+        <TextBox x:Name="Description" HorizontalAlignment="Left" Margin="160,219,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
+        <Label Content="Is Male&#xA;" HorizontalAlignment="Left" Margin="60,262,0,0" VerticalAlignment="Top" Width="100" Height="40"/>
+        <CheckBox x:Name="IsMaleCheckbox" Content="" HorizontalAlignment="Left" Margin="160,270,0,0" VerticalAlignment="Top" />
+        <Label Content="Nationality&#xA;" HorizontalAlignment="Left" Margin="60,307,0,0" VerticalAlignment="Top" Width="100" Height="40"/>
+        <TextBox x:Name="Nationality" HorizontalAlignment="Left" Margin="160,318,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />
+        <Button Content="Add To List" HorizontalAlignment="Left" Margin="60,367,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,-0.063" Width="220" Click="AddToListBtn"/>
+        <Button Content="Send To Server" HorizontalAlignment="Left" Margin="312,367,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,-0.063" Width="458" Click="SendToServerBtn"/>
+        <TextBlock x:Name="StarList" HorizontalAlignment="Left" Margin="312,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="245" Width="458"/>
+    </Grid>
+</Window>
